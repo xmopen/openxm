@@ -1,0 +1,18 @@
+server:
+  port: 9910
+
+spring:
+  application:
+    name: blog-user
+dubbo:
+  application:
+    name: blog-user
+  protocol:
+    name: dubbo
+    port: 9911
+  scan:
+    base-packages: cn.openxm.bloguser.service.impl
+  registry:
+    address: nacos://127.0.0.1:8848
+    username: nacos
+    password: nacos

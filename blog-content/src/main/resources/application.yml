@@ -1,0 +1,14 @@
+server:
+  port: 9800
+spring:
+  application:
+    name: blog-content
+
+dubbo:
+  application:
+    name: blog-content
+    qos-enable: false
+  registry:
+    address: nacos://127.0.0.1:8848
+    username: nacos
+    password: nacos

@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.openxm</groupId>
-    <artifactId>blog-content</artifactId>
-    <version>0.0.1</version>
-    <name>blog-content</name>
-    <description>blog-content</description>
+    <artifactId>blog-user</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>blog-user</name>
+    <description>blog-user</description>
     <url/>
     <licenses>
         <license/>
@@ -30,7 +30,6 @@
         <java.version>17</java.version>
     </properties>
     <dependencies>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -40,6 +39,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.openxm</groupId>
+            <artifactId>blog-common</artifactId>
+            <version>0.0.1</version>
         </dependency>
 
         <dependency>
@@ -53,13 +58,6 @@
             <artifactId>dubbo-nacos-spring-boot-starter</artifactId>
             <version>3.2.13</version>
         </dependency>
-        <dependency>
-            <groupId>cn.openxm</groupId>
-            <artifactId>blog-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-
 
     </dependencies>
 
