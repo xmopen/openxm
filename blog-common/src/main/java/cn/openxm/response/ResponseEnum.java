@@ -3,7 +3,7 @@ package cn.openxm.response;
 import lombok.Getter;
 
 /**
- * author zhenxinma
+ * author Xiao Ma
  * date 2024/6/23
  */
 @Getter

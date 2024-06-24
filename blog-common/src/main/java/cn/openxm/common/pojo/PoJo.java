@@ -8,7 +8,7 @@ package cn.openxm.common.pojo;
  * vo: 后端传递给前端的数据
  * dto: 前端传给后端的数据
  *
- * author zhenxinma
+ * author Xiao Ma
  * date 2024/6/25
  */
 public class PoJo {

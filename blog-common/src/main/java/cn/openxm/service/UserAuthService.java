@@ -1,7 +1,7 @@
 package cn.openxm.service;
 
 /**
- * author zhenxinma
+ * author Xiao Ma
  * date 2024/6/23
  */
 public interface UserAuthService {

@@ -5,16 +5,14 @@ import cn.openxm.service.UserAuthService;
 import org.apache.dubbo.config.annotation.DubboService;
 
 /**
- * author zhenxinma
+ * author Xiao Ma
  * date 2024/6/23
  */
 @DubboService
 public class UserAuthServiceImpl implements UserAuthService {
     @Override
     public String hello() {
-
         OpenXmUser user = new  OpenXmUser();
-
         System.out.println("RPC run..");
         return "UserAuthServiceImpl Run...";
     }

@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * author zhenxinma
+ * author Xiao Ma
  * date 2024/6/23
  */
-
 @Component
 @RestController()
 public class ProbeController {
