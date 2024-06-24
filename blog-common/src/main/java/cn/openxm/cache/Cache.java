@@ -7,7 +7,7 @@ package cn.openxm.cache;
  * date 2024/6/23
  */
 public interface Cache<T> {
-
+    // TODO: 后期引入在说。
 
 
 }

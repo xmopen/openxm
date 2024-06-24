@@ -1,5 +1,6 @@
 package cn.openxm.bloguser.service.impl;
 
+import cn.openxm.common.pojo.po.OpenXmUser;
 import cn.openxm.service.UserAuthService;
 import org.apache.dubbo.config.annotation.DubboService;
 
@@ -11,6 +12,9 @@ import org.apache.dubbo.config.annotation.DubboService;
 public class UserAuthServiceImpl implements UserAuthService {
     @Override
     public String hello() {
+
+        OpenXmUser user = new  OpenXmUser();
+
         System.out.println("RPC run..");
         return "UserAuthServiceImpl Run...";
     }

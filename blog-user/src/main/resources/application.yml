@@ -4,6 +4,12 @@ server:
 spring:
   application:
     name: blog-user
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://openxm.cn:3306/openxm
+    username: ${DATA_SOURCE_USER_NAME}
+    password: ${DATA_SOURCE_USER_PASSWORD}
+
 dubbo:
   application:
     name: blog-user
@@ -16,3 +22,4 @@ dubbo:
     address: nacos://127.0.0.1:8848
     username: nacos
     password: nacos
+
