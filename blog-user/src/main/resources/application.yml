@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: blog-user
+  mvc:
+    servlet:
+      path: /openxm/api/v1
+  # TODO: 连接池未进行配置。
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://openxm.cn:3306/openxm
@@ -17,9 +21,13 @@ dubbo:
     name: dubbo
     port: 9911
   scan:
-    base-packages: cn.openxm.bloguser.service.impl
+    base-packages: cn.openxm.bloguser.application.rpc
   registry:
     address: nacos://127.0.0.1:8848
     username: nacos
     password: nacos
 
+
+# mybatis 相关配置
+mybatis-plus:
+  mapper-locations: classpath:/mappers/*.xml

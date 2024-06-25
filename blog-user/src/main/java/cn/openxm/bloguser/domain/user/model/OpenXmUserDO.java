@@ -1,21 +1,23 @@
-package cn.openxm.common.pojo.po;
+package cn.openxm.bloguser.domain.user.model;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
+ * 对应数据库中的表：t_xm_user。
+ *
  * author Xiao Ma
- * date 2024/6/25
+ * date 2024/6/26
  */
 @Data
 @TableName(value = "t_xm_user")
-public class OpenXmUser implements Serializable {
-
+@ToString
+public class OpenXmUserDO implements Serializable {
     @TableField(value = "id")
     private Integer id;
 
