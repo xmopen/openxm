@@ -32,4 +32,6 @@ public class Response<T> implements Serializable {
         return new Response<T>(ResponseEnum.RESPONSE_FAIL_SYSTEM_ERROR.getCode(),
                 ResponseEnum.RESPONSE_FAIL_SYSTEM_ERROR.getMessage(), errorInfo);
     }
+
+    // TODO: 其实这里应该将Exception转换为目标Response。
 }

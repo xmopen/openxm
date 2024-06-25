@@ -1,13 +1,15 @@
-package cn.openxm.bloguser.infrastructure.email;
+package cn.openxm.bloguser.domain.mail.service;
 
 import lombok.Getter;
 
 /**
+ * MailServerTypeEnum 邮件服务协议。
+ *
  * author Xiao Ma
  * date 2024/6/26
  */
 @Getter
-public enum EMailServerTypeEnum {
+public enum MailServerTypeEnum {
 
     /**
      * 邮件服务协议为SFTP。
@@ -16,7 +18,7 @@ public enum EMailServerTypeEnum {
 
     private final String emailSftpServerType;
 
-    EMailServerTypeEnum(String emailSftpServerType){
+    MailServerTypeEnum(String emailSftpServerType){
         this.emailSftpServerType = emailSftpServerType;
     }
 }
