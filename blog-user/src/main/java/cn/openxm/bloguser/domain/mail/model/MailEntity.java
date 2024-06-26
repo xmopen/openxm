@@ -23,6 +23,9 @@ public class MailEntity {
 
     private String content;
 
+    /**
+     * TODO: 目前貌似没有起明显的效果在Mail接口层面上。
+     * */
     private MailType type;
 
     public static enum MailType {
