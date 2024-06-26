@@ -85,6 +85,12 @@
             <version>2.0.51</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.83</version>
+        </dependency>
+
         <!--https://blog.csdn.net/leilei1366615/article/details/104868250 SpringBoot中集成mail-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

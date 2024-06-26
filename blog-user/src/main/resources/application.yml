@@ -19,7 +19,7 @@ dubbo:
     name: blog-user
   protocol:
     name: dubbo
-    port: 9911
+    port: 19910
   scan:
     base-packages: cn.openxm.bloguser.application.rpc
   registry:

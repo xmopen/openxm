@@ -6,13 +6,15 @@ import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
  * author Xiao Ma
  * date 2024/6/23
  */
 @EnableDubbo
-@MapperScan(value = "cn.openxm.bloguser.dao")
+@EnableWebMvc
+@MapperScan(value = "cn.openxm.bloguser.infrastructure.dao")
 @SpringBootApplication
 public class BlogUserApplication {
 

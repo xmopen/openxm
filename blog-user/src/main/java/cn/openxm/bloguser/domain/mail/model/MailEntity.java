@@ -36,4 +36,7 @@ public class MailEntity {
             this.mailType = mailType;
         }
     }
+
+
+
 }

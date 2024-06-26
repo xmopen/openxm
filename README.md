@@ -5,3 +5,9 @@
 - 自研WEB框架。
 - 自研注册中心。
 - .....
+
+
+## OpenXM Project Port 分配。
+- user-auth
+  - http: 9910
+  - rpc: 19910

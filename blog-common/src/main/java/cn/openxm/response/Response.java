@@ -28,9 +28,11 @@ public class Response<T> implements Serializable {
                 data);
     }
 
-    public static <T> Response<T> fail(T errorInfo) {
-        return new Response<T>(ResponseEnum.RESPONSE_FAIL_SYSTEM_ERROR.getCode(),
-                ResponseEnum.RESPONSE_FAIL_SYSTEM_ERROR.getMessage(), errorInfo);
+    /**
+     * fail 根据给定的ResponseEnum将其构造成Fail的结构进行传输给上层服务。
+     * */
+    public static <T> Response<T> fail(ResponseEnum responseEnum) {
+        return new Response<T>(responseEnum.getCode(), responseEnum.getMessage(), null);
     }
 
     // TODO: 其实这里应该将Exception转换为目标Response。
