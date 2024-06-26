@@ -21,8 +21,7 @@ public class UserMailDTO {
      * toDomainEntity 将UserMailDTO转化为邮件业务领域内的实体。
      * */
     public MailEntity toDomainEntity() {
-        return MailEntity.builder().to(this.mail).type(MailEntity.MailType.MAIL_TYPE_TEXT)
-                .title("").subject("").build();
+        return MailEntity.builder().to(this.mail).type(MailEntity.MailType.MAIL_TYPE_TEXT).build();
     }
 
     /**

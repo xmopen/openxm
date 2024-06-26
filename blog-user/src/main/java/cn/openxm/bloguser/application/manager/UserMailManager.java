@@ -21,7 +21,7 @@ public class UserMailManager {
     private String mailFromUserAddr;
 
     // 注入邮件领域服务。
-    private Mail mailService;
+    private final Mail mailService;
 
     public UserMailManager(Mail mailService) {
         this.mailService = mailService;

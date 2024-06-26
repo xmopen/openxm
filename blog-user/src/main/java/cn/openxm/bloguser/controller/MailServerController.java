@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/mail")
 public class MailServerController {
 
-    private UserMailManager userMailManager;
+    private final UserMailManager userMailManager;
 
     public MailServerController(UserMailManager userMailManager) {
         this.userMailManager = userMailManager;
