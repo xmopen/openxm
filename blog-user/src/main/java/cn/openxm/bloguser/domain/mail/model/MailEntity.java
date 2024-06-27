@@ -1,5 +1,6 @@
 package cn.openxm.bloguser.domain.mail.model;
 
+import cn.openxm.bloguser.infrastructure.util.ThreadSafeRandom;
 import lombok.*;
 
 /**
@@ -23,9 +24,8 @@ public class MailEntity {
 
     private String content;
 
-    /**
-     * TODO: 目前貌似没有起明显的效果在Mail接口层面上。
-     * */
+    private int code;
+
     private MailType type;
 
     public static enum MailType {
@@ -40,6 +40,9 @@ public class MailEntity {
         }
     }
 
-
+    public int generateMailCode(){
+        this.code = ThreadSafeRandom.randomInt(1000,9999);
+        return this.code;
+    }
 
 }

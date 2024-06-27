@@ -13,7 +13,18 @@ spring:
     url: jdbc:mysql://openxm.cn:3306/openxm
     username: ${DATA_SOURCE_USER_NAME}
     password: ${DATA_SOURCE_USER_PASSWORD}
-
+  data:
+    redis:
+      host: openxm.cn
+      port: 6379
+      password: ${DATE_REDIS_PASSWORD}
+      lettuce:
+        pool:
+          enabled: true
+          max-active: 2                     # 连接池最大链接。
+          min-idle: 1                       # 连接池 最小空闲链接。
+          max-idle: 2                       # 最大空闲链接。
+          max-wait: -1ms                    # 连接池最大阻塞时间。
 dubbo:
   application:
     name: blog-user

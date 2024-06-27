@@ -97,6 +97,11 @@
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
+        <!--spring-boot-redis所需依赖 客户端默认为Lettcue-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
 
     </dependencies>
 

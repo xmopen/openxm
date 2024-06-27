@@ -2,6 +2,7 @@ package cn.openxm.response;
 
 import org.junit.jupiter.api.Test;
 
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -13,6 +14,9 @@ import java.util.Stack;
 public class CustomTest {
     @Test
     public void test() {
-        Map<Character,Character> pairs = new HashMap<>();
+        SecureRandom random = new   SecureRandom();
+        for (int i = 0; i < 10; i++) {
+            System.out.println(random.nextInt(1000,9999));
+        }
     }
 }
