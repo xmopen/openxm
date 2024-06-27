@@ -1,4 +1,4 @@
-package cn.openxm.service;
+package cn.openxm.common.service;
 
 /**
  * author Xiao Ma

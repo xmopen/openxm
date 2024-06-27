@@ -1,6 +1,6 @@
 package cn.openxm.bloguser.controller;
 
-import cn.openxm.response.Response;
+import cn.openxm.common.response.Response;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

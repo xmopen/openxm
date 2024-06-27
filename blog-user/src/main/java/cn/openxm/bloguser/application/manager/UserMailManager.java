@@ -3,8 +3,8 @@ package cn.openxm.bloguser.application.manager;
 import cn.openxm.bloguser.constant.MailConstant;
 import cn.openxm.bloguser.domain.mail.model.MailEntity;
 import cn.openxm.bloguser.domain.mail.service.Mail;
-import cn.openxm.response.Response;
-import cn.openxm.response.ResponseEnum;
+import cn.openxm.common.response.Response;
+import cn.openxm.common.response.ResponseEnum;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,6 @@ import java.util.Objects;
 @Service
 public class UserMailManager {
 
-    /********************************静态常量*********************************/
     @Value("${email.user.from.addr}")
     private String mailFromUserAddr;
 
@@ -45,6 +44,7 @@ public class UserMailManager {
 
         try {
             this.mailService.saveMailCodeMapping(mailEntity);
+            // 如果send由于网络抖动失败了呢？
             this.mailService.send(mailEntity);
         }catch (Exception e){
             // TODO: 日志信息处理。

@@ -1,4 +1,4 @@
-package cn.openxm.cache;
+package cn.openxm.common.cache;
 
 /**
  * Cache 本地缓存接口。

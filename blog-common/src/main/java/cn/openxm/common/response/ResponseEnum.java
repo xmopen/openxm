@@ -1,4 +1,4 @@
-package cn.openxm.response;
+package cn.openxm.common.response;
 
 import lombok.Getter;
 

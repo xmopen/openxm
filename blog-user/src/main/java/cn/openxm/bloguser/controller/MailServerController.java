@@ -2,8 +2,7 @@ package cn.openxm.bloguser.controller;
 
 import cn.openxm.bloguser.application.manager.UserMailManager;
 import cn.openxm.bloguser.controller.dto.UserMailDTO;
-import cn.openxm.response.Response;
-import org.springframework.beans.factory.annotation.Autowired;
+import cn.openxm.common.response.Response;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

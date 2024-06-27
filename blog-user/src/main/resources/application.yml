@@ -25,6 +25,14 @@ spring:
           min-idle: 1                       # 连接池 最小空闲链接。
           max-idle: 2                       # 最大空闲链接。
           max-wait: -1ms                    # 连接池最大阻塞时间。
+  mail:
+    host: smtp.qq.com
+    protocol: smtp
+    default-encoding: UTF-8
+    username: 2280480546@qq.com
+    password: ${MAIL_USER_PASSWORD_CODE}
+    test-connection: true
+
 dubbo:
   application:
     name: blog-user

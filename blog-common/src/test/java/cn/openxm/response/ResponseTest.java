@@ -1,5 +1,6 @@
 package cn.openxm.response;
 
+import cn.openxm.common.response.Response;
 import com.alibaba.fastjson2.JSON;
 import org.junit.jupiter.api.Test;
 

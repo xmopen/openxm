@@ -1,7 +1,7 @@
 package cn.openxm.bloguser.application.rpc;
 
 import cn.openxm.common.pojo.po.OpenXmUser;
-import cn.openxm.service.UserAuthService;
+import cn.openxm.common.service.UserAuthService;
 import org.apache.dubbo.config.annotation.DubboService;
 
 /**

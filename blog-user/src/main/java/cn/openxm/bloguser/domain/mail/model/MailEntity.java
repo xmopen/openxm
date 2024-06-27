@@ -28,6 +28,11 @@ public class MailEntity {
 
     private MailType type;
 
+    public int generateMailCode(){
+        this.code = ThreadSafeRandom.randomInt(1000,9999);
+        return this.code;
+    }
+
     public static enum MailType {
 
         MAIL_TYPE_TEXT(0),
@@ -38,11 +43,6 @@ public class MailEntity {
         MailType(int mailType){
             this.mailType = mailType;
         }
-    }
-
-    public int generateMailCode(){
-        this.code = ThreadSafeRandom.randomInt(1000,9999);
-        return this.code;
     }
 
 }
