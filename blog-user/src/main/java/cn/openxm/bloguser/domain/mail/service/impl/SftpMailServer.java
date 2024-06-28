@@ -1,17 +1,24 @@
 package cn.openxm.bloguser.domain.mail.service.impl;
 
+import cn.openxm.bloguser.constant.MailConstant;
+import cn.openxm.bloguser.constant.RedisKeysConstant;
+import cn.openxm.bloguser.constant.RedisLuaScriptConstant;
 import cn.openxm.bloguser.domain.mail.model.MailEntity;
 import cn.openxm.bloguser.domain.mail.model.MailRedisDO;
 import cn.openxm.bloguser.domain.mail.service.Mail;
 import cn.openxm.common.exception.mail.NotSupportMailType;
-import jakarta.annotation.Resource;
 import jakarta.mail.internet.MimeMessage;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
+import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
+import java.time.Duration;
+import java.util.Collections;
 
 /**
  * author Xiao Ma
@@ -31,7 +38,12 @@ public class SftpMailServer implements Mail {
 
     @Override
     public void send(MailEntity mail) throws Exception {
-
+        switch (mail.getType()) {
+            case MAIL_TYPE_HTML -> this.sendHtml(mail);
+            case MAIL_TYPE_TEXT -> this.sendText(mail);
+            default -> throw new NotSupportMailType(String.format("Not support the mail type: %s, expect is (0,1)",
+                    mail.getType()));
+        }
     }
 
     /**
@@ -39,27 +51,19 @@ public class SftpMailServer implements Mail {
      * 为了更加节省内存，可以使用pb进行编解码。
      */
     @Override
-    public void saveMailCodeMapping(MailEntity mail) throws Exception {
-        // 1、先确定是否存在。
-        // 1、保存映射关系。
+    public boolean saveMailCodeMapping(MailEntity mail) throws Exception {
         MailRedisDO mailRedisDO = MailRedisDO.builder().mail(mail.getTo()).code(mail.getCode()).count(1).build();
-        // Redis存储。
-        redisTemplate.opsForHash().put(mail.getTo(), "", mailRedisDO);
-        // TODO: 待处理。
-        // 不是原子操作？
-        //  redisTemplate.expire();
-        this.sendMail(mail);
+        DefaultRedisScript<Boolean> script =  new DefaultRedisScript<>();
+        script.setScriptText(RedisLuaScriptConstant.REDIS_LUA_SCRIPT_HASH_SET_WITH_EXPIRED);
+        script.setResultType(Boolean.class);
+        return Boolean.TRUE.equals(redisTemplate.execute(script,
+                Collections.singletonList(String.format(RedisKeysConstant.REDIS_KEY_USER_MAIL_CODE_KEY, mail.getTo())),
+                mailRedisDO, RedisKeysConstant.REDIS_TTL_MAIL_CODE_REDIS_MINUTE_TTL));
     }
 
 
     private void sendMail(MailEntity mail) throws Exception {
-        // switch 表达式可以拥有返回值
-        switch (mail.getType()) {
-            case MAIL_TYPE_HTML -> this.sendHtml(mail);
-            case MAIL_TYPE_TEXT -> this.sendText(mail);
-            default -> throw new NotSupportMailType(String.format("Not support the mail type: %s, expect is (0,1)",
-                    mail.getType()));
-        }
+
     }
 
     private void sendText(MailEntity mail) throws Exception {

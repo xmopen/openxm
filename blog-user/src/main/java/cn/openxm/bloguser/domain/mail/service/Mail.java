@@ -18,5 +18,5 @@ public interface Mail {
      * saveMailWithCodeMapping 持久化邮件和邮件验证码。
      * 接口层面必须保证一个邮箱只能在一个固定窗口请求N次。
      * */
-    void saveMailCodeMapping(MailEntity mail) throws Exception;
+    boolean saveMailCodeMapping(MailEntity mail) throws Exception;
 }

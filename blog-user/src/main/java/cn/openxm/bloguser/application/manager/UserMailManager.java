@@ -43,7 +43,9 @@ public class UserMailManager {
                 mailEntity.generateMailCode()));
 
         try {
-            this.mailService.saveMailCodeMapping(mailEntity);
+            if (!this.mailService.saveMailCodeMapping(mailEntity)) {
+                return Response.fail(ResponseEnum.RESPONSE_FAIL_SYSTEM_ERROR);
+            }
             // 如果send由于网络抖动失败了呢？
             this.mailService.send(mailEntity);
         }catch (Exception e){

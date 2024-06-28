@@ -2,6 +2,7 @@ package cn.openxm.response;
 
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLOutput;
 import java.util.Map;
 
 /**
@@ -28,6 +29,9 @@ public class EnvTest {
                 System.out.println(entry.getValue());
             }
             if (entry.getKey().equals("JAVA_HOME")) {
+                System.out.println(entry.getValue());
+            }
+            if (entry.getKey().equals("DATE_REDIS_PASSWORD")) {
                 System.out.println(entry.getValue());
             }
         }
