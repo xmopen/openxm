@@ -17,11 +17,4 @@ public class MailConstant {
      * */
     public static final String MAIL_GENERATE_CODE_CONTENT_HTML_TEMPLATE = "openxm社区注册验证码: <b>%d</b>，请返回注册页面进行注册登录。";
 
-
-    /**
-     * MAIL_CODE_REDIS_KEY_CODE 邮箱验证码Key。
-     * */
-    public static final String MAIL_CODE_REDIS_KEY_CODE = "mail.code";
-
-
 }

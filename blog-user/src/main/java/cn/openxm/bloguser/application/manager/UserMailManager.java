@@ -42,14 +42,14 @@ public class UserMailManager {
         mailEntity.setContent(String.format(MailConstant.MAIL_GENERATE_CODE_CONTENT_HTML_TEMPLATE,
                 mailEntity.generateMailCode()));
 
+        // 2、持久化Code到Redis中。
         try {
             if (!this.mailService.saveMailCodeMapping(mailEntity)) {
                 return Response.fail(ResponseEnum.RESPONSE_FAIL_SYSTEM_ERROR);
             }
-            // 如果send由于网络抖动失败了呢？
+            // 3、发送邮件。
             this.mailService.send(mailEntity);
         }catch (Exception e){
-            // TODO: 日志信息处理。
             return Response.fail(ResponseEnum.RESPONSE_FAIL_SYSTEM_ERROR);
         }
 

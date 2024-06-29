@@ -1,6 +1,5 @@
 package cn.openxm.bloguser.domain.mail.service.impl;
 
-import cn.openxm.bloguser.constant.MailConstant;
 import cn.openxm.bloguser.constant.RedisKeysConstant;
 import cn.openxm.bloguser.constant.RedisLuaScriptConstant;
 import cn.openxm.bloguser.domain.mail.model.MailEntity;
@@ -8,16 +7,13 @@ import cn.openxm.bloguser.domain.mail.model.MailRedisDO;
 import cn.openxm.bloguser.domain.mail.service.Mail;
 import cn.openxm.common.exception.mail.NotSupportMailType;
 import jakarta.mail.internet.MimeMessage;
-import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
-import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
 import java.util.Collections;
 
 /**
@@ -47,23 +43,18 @@ public class SftpMailServer implements Mail {
     }
 
     /**
-     * 用什么数据结构比较合适？
-     * 为了更加节省内存，可以使用pb进行编解码。
-     */
+     * saveMailCodeMapping 如果重复发送邮件，即便过了上层的限制，这里只需要覆盖即可，而覆盖则会将原先的Code失效。并重新启用新的Code。
+     * */
     @Override
-    public boolean saveMailCodeMapping(MailEntity mail) throws Exception {
+    public boolean saveMailCodeMapping(MailEntity mail) {
         MailRedisDO mailRedisDO = MailRedisDO.builder().mail(mail.getTo()).code(mail.getCode()).count(1).build();
         DefaultRedisScript<Boolean> script =  new DefaultRedisScript<>();
         script.setScriptText(RedisLuaScriptConstant.REDIS_LUA_SCRIPT_HASH_SET_WITH_EXPIRED);
         script.setResultType(Boolean.class);
         return Boolean.TRUE.equals(redisTemplate.execute(script,
-                Collections.singletonList(String.format(RedisKeysConstant.REDIS_KEY_USER_MAIL_CODE_KEY, mail.getTo())),
-                mailRedisDO, RedisKeysConstant.REDIS_TTL_MAIL_CODE_REDIS_SECOND_TTL));
-    }
-
-
-    private void sendMail(MailEntity mail) throws Exception {
-
+                Collections.singletonList(String.format(RedisKeysConstant.REDIS_KEY_USER_MAIL, mail.getTo())),
+                RedisKeysConstant.REDIS_KEY_USER_MAIL_CODE, mailRedisDO,
+                RedisKeysConstant.REDIS_TTL_MAIL_CODE_REDIS_SECOND_TTL));
     }
 
     private void sendText(MailEntity mail) throws Exception {
