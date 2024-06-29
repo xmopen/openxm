@@ -15,8 +15,8 @@ public class RedisKeysConstant {
 
 
     /**
-     * MAIL_CODE_REDIS_MINUTE_TTL 邮箱验证码缓存过期时间。
+     * REDIS_TTL_MAIL_CODE_REDIS_SECOND_TTL 邮箱验证码缓存过期时间。
      * */
-    public static final int REDIS_TTL_MAIL_CODE_REDIS_MINUTE_TTL = 15;
+    public static final int REDIS_TTL_MAIL_CODE_REDIS_SECOND_TTL = 600;
 
 }

@@ -22,16 +22,16 @@ public class EnvTest {
     public void testSystemEnvironment() {
         Map<String, String> env = System.getenv();
         for (Map.Entry<String, String> entry : env.entrySet()) {
-            if (entry.getKey().equals("DATA_SOURCE_USER_NAME")) {
-                System.out.println(entry.getValue());
-            }
-            if (entry.getKey().equals("DATA_SOURCE_USER_PASSWORD")) {
-                System.out.println(entry.getValue());
-            }
-            if (entry.getKey().equals("JAVA_HOME")) {
-                System.out.println(entry.getValue());
-            }
-            if (entry.getKey().equals("DATE_REDIS_PASSWORD")) {
+//            if (entry.getKey().equals("DATA_SOURCE_USER_NAME")) {
+//                System.out.println(entry.getValue());
+//            }
+//            if (entry.getKey().equals("DATA_SOURCE_USER_PASSWORD")) {
+//                System.out.println(entry.getValue());
+//            }
+//            if (entry.getKey().equals("JAVA_HOME")) {
+//                System.out.println(entry.getValue());
+//            }
+            if (entry.getKey().equals("DATA_REDIS_PASSWORD")) {
                 System.out.println(entry.getValue());
             }
         }

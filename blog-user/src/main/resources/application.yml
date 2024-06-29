@@ -15,18 +15,22 @@ spring:
     password: ${DATA_SOURCE_USER_PASSWORD}
   data:
     redis:
-      host: 43.136.18.173:6379             # 貌似地址没有生效
+      host: openxm.cn
       port: 6379
-      password: "@@mzx19980803.@#"
-#      password: ${DATE_REDIS_PASSWORD}
-      database: 0
-  #      lettuce:
-#        pool:
-#          enabled: true
-#          max-active: 2                     # 连接池最大链接。
-#          min-idle: 1                       # 连接池 最小空闲链接。
-#          max-idle: 2                       # 最大空闲链接。
-#          max-wait: -1ms                    # 连接池最大阻塞时间。
+      client-type: lettuce
+      password: ${DATA_REDIS_PASSWORD}
+      database: 1
+      timeout: 10000                        # 数据读取超时时间。
+      connect-timeout: 10                   # 连接超时时间。
+      lettuce:
+        pool:
+          enabled: true
+          max-active: 15                    # Redis Lettuce最大链接数量，当超过最大链接数量时，则会执行max-wait最大等待时间。
+          max-idle: 10                       # Redis Lettuce 最大空闲链接数
+          min-idle: 2                       # Redis Lettuce 最小空闲链接数
+          max-wait: 10s                     # Redis Lettuce 连接池最大等待时间，当数量耗尽时，在最大等待时间内进行等待，超时之后抛出异常。
+          time-between-eviction-runs: 60s   # Redis Lettuce 空闲链接最这个时间内如果未被启用则会Close
+
   mail:
     host: smtp.qq.com
     protocol: smtp
