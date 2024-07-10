@@ -22,7 +22,7 @@ public @interface RateLimit {
     /**
      * limitKey 限流Key。
      */
-    RateLimitKeyEnum limitKey() default RateLimitKeyEnum.IP;
+    String limitKey() default "";
 
     /**
      * seconds 限流窗口。

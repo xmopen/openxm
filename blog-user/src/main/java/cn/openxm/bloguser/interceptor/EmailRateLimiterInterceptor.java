@@ -30,7 +30,8 @@ public class EmailRateLimiterInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
         if (handler instanceof HandlerMethod method) {
-            if (this.slidingWindowRateLimit.limitWithRedis(method.getMethodAnnotation(RateLimit.class))) {
+            if (this.slidingWindowRateLimit.limitWithRedis(method.getMethodAnnotation(RateLimit.class),
+                    this.getRemoteClientIp(request))) {
                 return true;
             }
             response.setStatus(HttpServletResponse.SC_OK);
