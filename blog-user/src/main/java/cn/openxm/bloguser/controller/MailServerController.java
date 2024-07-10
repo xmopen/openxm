@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 路径前缀：/openxm/api/v1/xxx。
  * /openxm/api/v1/mail/generate/code
- * author Xiao Ma
- * date 2024/6/27
+ *
+ * @author Xiao Ma
+ * @date 2024/6/27
+ * @slogan 少年应有鸿鹄志，当骑骏马踏平川。
  */
 @RestController
 @RequestMapping(value = "/mail")

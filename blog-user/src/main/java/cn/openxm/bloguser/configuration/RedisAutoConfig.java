@@ -10,8 +10,11 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
- * author Xiao Ma
- * date 2024/6/27
+ * RedisAutoConfig Redis自动装配配置类。
+ *
+ * @author Xiao Ma
+ * @date 2024/6/27
+ * @slogan 少年应有鸿鹄志，当骑骏马踏平川。
  */
 @Configuration
 public class RedisAutoConfig {

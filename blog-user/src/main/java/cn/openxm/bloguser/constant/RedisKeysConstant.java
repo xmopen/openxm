@@ -3,8 +3,9 @@ package cn.openxm.bloguser.constant;
 /**
  * RedisKeysConstant Redis Keys。
  *
- * author Xiao Ma
- * date 2024/6/28
+ * @author Xiao Ma
+ * @date 2024/6/28
+ * @slogan 少年应有鸿鹄志，当骑骏马踏平川。
  */
 public class RedisKeysConstant {
 

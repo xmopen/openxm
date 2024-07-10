@@ -1,9 +1,11 @@
 package cn.openxm.bloguser.constant;
 
 /**
- * 邮件常量。
- * author Xiao Ma
- * date 2024/6/27
+ * MailConstant 邮件常量。
+ *
+ * @author Xiao Ma
+ * @date 2024/6/27
+ * @slogan 少年应有鸿鹄志，当骑骏马踏平川。
  */
 public class MailConstant {
 

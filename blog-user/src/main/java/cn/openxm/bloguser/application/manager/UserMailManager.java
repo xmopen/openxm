@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 
 /**
- * author Xiao Ma
- * date 2024/6/27
+ * UserMailManager 用户邮件管理中心。
+ * @author Xiao Ma
+ * @date 2024/6/27
+ * @slogan 少年应有鸿鹄志，当骑骏马踏平川。
  */
 @Service
 public class UserMailManager {
@@ -20,7 +22,6 @@ public class UserMailManager {
     @Value("${email.user.from.addr}")
     private String mailFromUserAddr;
 
-    // 注入邮件领域服务。
     private final Mail mailService;
 
     public UserMailManager(Mail mailService) {

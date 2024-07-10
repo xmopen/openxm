@@ -3,8 +3,9 @@ package cn.openxm.bloguser.domain.mail.service;
 import cn.openxm.bloguser.domain.mail.model.MailEntity;
 
 /**
- * author Xiao Ma
- * date 2024/6/26
+ * @author Xiao Ma
+ * @date 2024/6/26
+ * @slogan 少年应有鸿鹄志，当骑骏马踏平川。
  */
 public interface Mail {
 

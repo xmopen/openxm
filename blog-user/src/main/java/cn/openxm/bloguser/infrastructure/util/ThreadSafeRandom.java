@@ -8,8 +8,9 @@ import java.security.SecureRandom;
  * 2、java.security.SecureRandom 在线程安全的环境下，提供高安全性的、更加高难度的被攻击预测的随机函数。
  * 3、java.util.concurrent.ThreadLocalRandom 高效并且线程安全的但是安全性没有第二个高的随机算法。
  *
- * author Xiao Ma
- * date 2024/6/27
+ * @author Xiao Ma
+ * @date 2024/6/27
+ * @slogan 少年应有鸿鹄志，当骑骏马踏平川。
  */
 public class ThreadSafeRandom {
 

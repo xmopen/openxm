@@ -22,7 +22,12 @@ public enum ResponseEnum {
     /**
      * RESPONSE_FAIL_SYSTEM_ERROR 系统内部异常错误码，用来表示内部通用异常
      * */
-    RESPONSE_FAIL_SYSTEM_ERROR(-1,"system error"),
+    RESPONSE_FAIL_SYSTEM_ERROR(1,"系统异常，请稍后重试！"),
+
+    /**
+     * RESPONSE_FAIL_INTERFACE_LIMIT 接口限流。
+     * */
+    RESPONSE_FAIL_INTERFACE_LIMIT(2,"接口达到访问次数限制，请稍后重试！"),
 
     /**
      * RESPONSE_FAIL_USER_MAIL_IS_EMPTY 用户服务中用户的邮箱为空。

@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
  * 提供登录、注册、校验登录态三种接口。
  * 注意：所有路径前缀为：/openxm/api/v1/xxx。
  *
- * author Xiao Ma
- * date 2024/6/26
+ * @author Xiao Ma
+ * @date 2024/6/26
+ * @slogan 少年应有鸿鹄志，当骑骏马踏平川。
  */
 @RestController
 @RequestMapping(value = "/auth")

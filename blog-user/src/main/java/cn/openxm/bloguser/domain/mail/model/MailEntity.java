@@ -4,8 +4,9 @@ import cn.openxm.bloguser.infrastructure.util.ThreadSafeRandom;
 import lombok.*;
 
 /**
- * author Xiao Ma
- * date 2024/6/26
+ * @author Xiao Ma
+ * @date 2024/6/26
+ * @slogan 少年应有鸿鹄志，当骑骏马踏平川。
  */
 @Data
 @Builder

@@ -1,5 +1,6 @@
 package cn.openxm.bloguser.configuration;
 
+import cn.openxm.bloguser.interceptor.EmailRateLimiterInterceptor;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
@@ -16,12 +17,19 @@ import java.util.List;
 
 /**
  * WebMvcConfig 增加针对WebMvc的一些特定配置。
- * <p>
- * author Xiao Ma
- * date 2024/6/26
+ *
+ * @author Xiao Ma
+ * @date 2024/6/26
+ * @slogan 少年应有鸿鹄志，当骑骏马踏平川。
  */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
+
+    private final EmailRateLimiterInterceptor emailRateLimiterInterceptor;
+
+    public WebMvcConfig(EmailRateLimiterInterceptor emailRateLimiterInterceptor) {
+        this.emailRateLimiterInterceptor = emailRateLimiterInterceptor;
+    }
 
     /**
      * Cors 配置：针对所有路径、所有来源、所有请求方法、所有请求头都允许进行访问，同时支持Cookie以及最大缓存时间为一个小时。
@@ -43,15 +51,17 @@ public class WebMvcConfig implements WebMvcConfigurer {
         fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat,SerializerFeature.WriteMapNullValue,
                 SerializerFeature.WriteDateUseDateFormat);
         fastConverter.setFastJsonConfig(fastJsonConfig);
-        // 中文乱码
         List<MediaType> fastMediaTypes = new ArrayList<>();
         fastMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);
         fastConverter.setSupportedMediaTypes(fastMediaTypes);
         converters.add(0,fastConverter);
     }
 
+    /**
+     * addInterceptors 针对指定路径添加拦截器。注意这里的路径是SpringMVC的路径，而不是Servlet的路径。
+     * */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor().addPathPatterns()
+        registry.addInterceptor(this.emailRateLimiterInterceptor).addPathPatterns("/mail/generate/code");
     }
 }
