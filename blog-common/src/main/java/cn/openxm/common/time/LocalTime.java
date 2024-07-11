@@ -26,6 +26,13 @@ public class LocalTime {
     }
 
     /**
+     * getCurrenTimeWithMillis 获取当前时间的毫秒表示形式。
+     * */
+    public static Long getCurrenTimeWithMillis(){
+        return System.currentTimeMillis();
+    }
+
+    /**
      * getCurrentTimeWithFormatter 通过给定的时间格式返回其目标时间。
      * */
     public static String getCurrentTimeWithFormatter(String formatter){

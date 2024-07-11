@@ -41,6 +41,12 @@
             <scope>test</scope>
         </dependency>
 
+        <!--Logback 日志-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>cn.openxm</groupId>
             <artifactId>blog-common</artifactId>

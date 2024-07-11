@@ -3,6 +3,8 @@ package cn.openxm.bloguser.infrastructure.limit;
 import cn.openxm.bloguser.constant.RedisLuaScriptConstant;
 import cn.openxm.common.annotation.RateLimit;
 import cn.openxm.common.time.LocalTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Component;
@@ -25,6 +27,11 @@ public class SlidingWindowRateLimit {
      * */
     private static final byte DEFAULT_RATE_LIMIT_VALUE = 0x00;
 
+    /**
+     * LOGGER 日志。
+     * */
+    private static final Logger LOGGER = LoggerFactory.getLogger(SlidingWindowRateLimit.class);
+
     private final RedisTemplate<String,Object> redisTemplate;
 
     public SlidingWindowRateLimit(RedisTemplate<String,Object> redisTemplate) {
@@ -36,24 +43,25 @@ public class SlidingWindowRateLimit {
      * 1、固定窗口：通过Redis总的setnx实现。
      * 1、漏桶算法：通过Redis中的List实现。
      * 2、令牌桶(滑动窗口)：通过Redis中的Zset实现。
-     * @return false 表示限流，否则表示不限流。
+     * @return true 表示限流，否则表示不限流。
      */
     public boolean limitWithRedis(RateLimit rateLimit,String clientLimitKey) {
         if (rateLimit == null) {
-            return false;
+            return true;
         }
         DefaultRedisScript<Boolean> script = new DefaultRedisScript<>();
         script.setScriptText(RedisLuaScriptConstant.REDIS_LUA_SCRIPT_SLIDING_WINDOW_RATE_LIMIT_ZSET);
         script.setResultType(Boolean.class);
-
-        long windowRight = LocalTime.getCurrenTimeWithSecond();
-        return Boolean.TRUE.equals(this.redisTemplate.execute(script,
+        long windowRight = LocalTime.getCurrenTimeWithMillis();
+        long windowLeft = windowRight - rateLimit.window();
+        LOGGER.info("limit key:{},windowLeft:{},windowRight:{},window:{}", this.getRateLimitKey(rateLimit, clientLimitKey),
+                windowLeft, windowRight, (windowRight-windowLeft)/1e3);
+        return !Boolean.TRUE.equals(this.redisTemplate.execute(script,
                 Collections.singletonList(this.getRateLimitKey(rateLimit,clientLimitKey)),
-                windowRight- rateLimit.limit(),
+                windowLeft,
                 windowRight,
                 rateLimit.limit(),
-                SlidingWindowRateLimit.DEFAULT_RATE_LIMIT_VALUE,
-                rateLimit.window()));
+                rateLimit.window()/1000));
     }
 
     /**

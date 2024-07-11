@@ -48,28 +48,22 @@ public class RedisLuaScriptConstant {
      *  5、ttl
      */
     public static final String REDIS_LUA_SCRIPT_SLIDING_WINDOW_RATE_LIMIT_ZSET = """
-            -- 1、删除不在窗口范围的请求标记
-            local removeResult = redis.call('ZREMRANGEBYSCORE',KEYS[1],0,ARGV[1]);
-            if (removeResult==0)
-            then
-                return 0;
-            end
-                       
-            -- 2、对当前Key进行续期
-            local expireResult=redis.call('expire', KEYS[1],ARGV[5]);
-            if (expireResult==0)
-            then
-                return 0;
-            end
-                      
-            -- 3、如果请求次数大于指定次数，则限流
-            local hitCount = redis.call('ZRANGEBYSCORE',KEYS[1],ARGV[1],ARGV[2],ARGV[3]);
-            if (hitCount>=ARGV[3])
-            then
-                return 0;
-            end
-                      
-            -- 4、增加请求次数到当前Key中
-            return redis.call('ZADD',KEYS[1],ARGV[2],ARGV[4]);
+             -- 1、删除不在窗口范围的请求标记
+             local remResult = redis.call('ZREMRANGEBYSCORE',KEYS[1],'-inf',ARGV[1]);
+             -- 2、如果请求次数大于指定次数，则限流
+             local hitCount=redis.call('ZRANGEBYSCORE',KEYS[1],ARGV[1],ARGV[2],'LIMIT', 0, ARGV[3]+1);
+             -- hitCount返回的是Table
+             if (hitCount ~= nil and  #hitCount>=tonumber(ARGV[3]))
+             then
+                 return 0;
+             end
+             
+             -- 4、增加请求次数到当前Key中
+             local addRequestCountResult = redis.call('ZADD',KEYS[1],ARGV[2],ARGV[2]);
+             if (addRequestCountResult==0) 
+             then
+                return addRequestCountResult;
+             end
+             return redis.call('expire', KEYS[1],ARGV[4]);
            """;
 }

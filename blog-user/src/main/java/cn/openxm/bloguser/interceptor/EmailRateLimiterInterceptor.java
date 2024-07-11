@@ -6,6 +6,8 @@ import cn.openxm.common.response.Response;
 import cn.openxm.common.response.ResponseEnum;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.NonNullApi;
 import org.springframework.stereotype.Component;
@@ -23,15 +25,24 @@ public class EmailRateLimiterInterceptor implements HandlerInterceptor {
 
     private final SlidingWindowRateLimit slidingWindowRateLimit;
 
+    /**
+     * logger 日志。
+     * */
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmailRateLimiterInterceptor.class);
+
     public EmailRateLimiterInterceptor(SlidingWindowRateLimit slidingWindowRateLimit) {
         this.slidingWindowRateLimit = slidingWindowRateLimit;
     }
 
     @Override
     public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
+        LOGGER.info("pre handler");
         if (handler instanceof HandlerMethod method) {
-            if (this.slidingWindowRateLimit.limitWithRedis(method.getMethodAnnotation(RateLimit.class),
-                    this.getRemoteClientIp(request))) {
+            RateLimit annotationRateLimit = method.getMethodAnnotation(RateLimit.class);
+            if (annotationRateLimit == null) {
+                return true;
+            }
+            if (!this.slidingWindowRateLimit.limitWithRedis(annotationRateLimit, this.getRemoteClientIp(request))) {
                 return true;
             }
             response.setStatus(HttpServletResponse.SC_OK);

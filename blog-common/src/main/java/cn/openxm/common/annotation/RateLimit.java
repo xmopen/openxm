@@ -25,9 +25,9 @@ public @interface RateLimit {
     String limitKey() default "";
 
     /**
-     * seconds 限流窗口。
+     * seconds 限流时间窗口。单位毫秒，默认为5分钟。
      */
-    int window();
+    int window() default 1000*60*5;
 
     /**
      * needLogin 限流是否针对用户登录。

@@ -1,5 +1,10 @@
 server:
   port: 9910
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
 
 spring:
   application:
@@ -51,6 +56,12 @@ dubbo:
     address: nacos://127.0.0.1:8848
     username: nacos
     password: nacos
+
+
+# 日志配置。
+logging:
+  level:
+    root: info
 
 
 # mybatis 相关配置
