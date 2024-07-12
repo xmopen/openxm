@@ -17,7 +17,7 @@ import java.sql.Timestamp;
 @Data
 @TableName(value = "t_xm_user")
 @ToString
-public class OpenXmUserDO implements Serializable {
+public class UserDO implements Serializable {
     @TableField(value = "id")
     private Integer id;
 

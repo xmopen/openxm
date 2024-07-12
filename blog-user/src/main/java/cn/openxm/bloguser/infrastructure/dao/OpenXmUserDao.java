@@ -1,6 +1,6 @@
 package cn.openxm.bloguser.infrastructure.dao;
 
-import cn.openxm.bloguser.domain.user.model.OpenXmUserDO;
+import cn.openxm.bloguser.domain.user.model.UserDO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -12,5 +12,5 @@ import org.springframework.stereotype.Repository;
  */
 @Mapper
 @Repository
-public interface OpenXmUserDao extends BaseMapper<OpenXmUserDO> {
+public interface OpenXmUserDao extends BaseMapper<UserDO> {
 }

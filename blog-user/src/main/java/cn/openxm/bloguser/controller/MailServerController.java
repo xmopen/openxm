@@ -26,7 +26,6 @@ public class MailServerController {
 
     /**
      * generateMailCode 针对用户的邮件生成一个随机的验证码，并保留15分钟。
-     * @RequestBody UserMailDTO userMailDTO
      * */
     @PostMapping(value = "/generate/code")
     @RateLimit(limit = 1,limitKey = "user.mail",window = 1000*60)

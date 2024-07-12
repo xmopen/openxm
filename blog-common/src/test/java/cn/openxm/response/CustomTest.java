@@ -14,9 +14,10 @@ import java.util.Stack;
 public class CustomTest {
     @Test
     public void test() {
-        SecureRandom random = new   SecureRandom();
-        for (int i = 0; i < 10; i++) {
-            System.out.println(random.nextInt(1000,9999));
+        try {
+            int result = 1/0;
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }

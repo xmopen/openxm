@@ -36,7 +36,7 @@ public class EmailRateLimiterInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
-        LOGGER.info("pre handler");
+        LOGGER.info("{} pre handler of HandlerInterceptor",request.getRequestURI());
         if (handler instanceof HandlerMethod method) {
             RateLimit annotationRateLimit = method.getMethodAnnotation(RateLimit.class);
             if (annotationRateLimit == null) {

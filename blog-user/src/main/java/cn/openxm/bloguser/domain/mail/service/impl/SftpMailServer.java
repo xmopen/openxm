@@ -54,7 +54,8 @@ public class SftpMailServer implements Mail {
         script.setResultType(Boolean.class);
         return Boolean.TRUE.equals(redisTemplate.execute(script,
                 Collections.singletonList(String.format(RedisKeysConstant.REDIS_KEY_USER_MAIL, mail.getTo())),
-                RedisKeysConstant.REDIS_KEY_USER_MAIL_CODE, mailRedisDO,
+                RedisKeysConstant.REDIS_KEY_USER_MAIL_CODE,
+                mailRedisDO,
                 RedisKeysConstant.REDIS_TTL_MAIL_CODE_REDIS_SECOND_TTL));
     }
 

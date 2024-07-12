@@ -1,10 +1,10 @@
 package cn.openxm.bloguser.controller;
 
+import cn.openxm.bloguser.application.manager.UserAuthManager;
+import cn.openxm.bloguser.controller.dto.UserAuthDTO;
 import cn.openxm.common.response.Response;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import cn.openxm.common.service.UserAuthService;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * UserAuthController 用户鉴权控制器。
@@ -16,12 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
  * @slogan 少年应有鸿鹄志，当骑骏马踏平川。
  */
 @RestController
-@RequestMapping(value = "/auth")
+@RequestMapping(value = "/user/auth")
 public class UserAuthController {
 
+    private final UserAuthManager userAuthManager;
+
+    public UserAuthController(UserAuthManager userAuthManager) {
+        this.userAuthManager = userAuthManager;
+    }
+
     @PostMapping(value = "/register")
-    public Response<Object> userRegister(){
-        return null;
+    public Response<Object> userRegister(@RequestBody UserAuthDTO userAuthDTO){
+        return this.userAuthManager.register(userAuthDTO.toDomainEntity());
     }
 
     @PostMapping(value = "/login")
