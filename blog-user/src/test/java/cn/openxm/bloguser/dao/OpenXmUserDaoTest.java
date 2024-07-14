@@ -1,8 +1,7 @@
 package cn.openxm.bloguser.dao;
 
 import cn.openxm.bloguser.BlogUserApplication;
-import cn.openxm.bloguser.infrastructure.dao.OpenXmUserDao;
-import cn.openxm.common.pojo.po.OpenXmUser;
+import cn.openxm.bloguser.infrastructure.dao.UserDao;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class OpenXmUserDaoTest {
 
     @Autowired
-    private OpenXmUserDao openXmUserDao;
+    private UserDao openXmUserDao;
 
     @Test
     public void testDao(){

@@ -2,7 +2,7 @@ package cn.openxm.bloguser.application.manager;
 
 import cn.openxm.bloguser.constant.MailConstant;
 import cn.openxm.bloguser.domain.mail.model.MailEntity;
-import cn.openxm.bloguser.domain.mail.service.Mail;
+import cn.openxm.bloguser.domain.mail.service.MailDomain;
 import cn.openxm.common.response.Response;
 import cn.openxm.common.response.ResponseEnum;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,9 +22,9 @@ public class UserMailManager {
     @Value("${email.user.from.addr}")
     private String mailFromUserAddr;
 
-    private final Mail mailService;
+    private final MailDomain mailService;
 
-    public UserMailManager(Mail mailService) {
+    public UserMailManager(MailDomain mailService) {
         this.mailService = mailService;
     }
 

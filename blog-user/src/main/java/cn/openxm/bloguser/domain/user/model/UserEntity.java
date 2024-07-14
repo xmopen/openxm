@@ -11,9 +11,10 @@ import java.util.Objects;
  * <p>
  * 其最终通过Builder建造者模式对外提供实例，从而提供服务，其提供的服务都是单例。
  *  TODO: 是否自己可以实现Builder注解？然后通过内存池来进行实现？
- * <p>
- * author Xiao Ma
- * date 2024/6/26
+ *
+ * @author Xiao Ma
+ * @date 2024/6/26
+ * @slogan 少年应有鸿鹄志，当骑骏马踏平川。
  */
 @Data
 @Builder
@@ -21,6 +22,11 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserEntity implements Serializable {
+
+    /**
+     * 用户唯一标识符。
+     * */
+    private Integer id;
 
     private String mail;
 
@@ -39,6 +45,13 @@ public class UserEntity implements Serializable {
     public boolean checkRegisterInfoIsValid() {
         return !Objects.equals(this.mail, "") && this.mailCode != 0 && !Objects.equals(this.nickName, "")
                 && !Objects.equals(this.password, "");
+    }
+
+    /**
+     * mailCodeIsMatch 邮箱验证码是否匹配。
+     * */
+    public boolean mailCodeIsNotMatch(int targetMailCode){
+        return this.mailCode != targetMailCode;
     }
 
 }

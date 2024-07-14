@@ -1,13 +1,14 @@
 package cn.openxm.bloguser.domain.mail.service;
 
 import cn.openxm.bloguser.domain.mail.model.MailEntity;
+import cn.openxm.bloguser.domain.mail.model.MailRedisDO;
 
 /**
  * @author Xiao Ma
  * @date 2024/6/26
  * @slogan 少年应有鸿鹄志，当骑骏马踏平川。
  */
-public interface Mail {
+public interface MailDomain {
 
     /**
      * 按照MailEntity实体进行邮件发送。
@@ -20,4 +21,9 @@ public interface Mail {
      * 接口层面必须保证一个邮箱只能在一个固定窗口请求N次。
      * */
     boolean saveMailCodeMapping(MailEntity mail) ;
+
+    /**
+     * getMailCodeInfo 获取用户邮件对应的验证码。
+     * */
+    MailRedisDO getMailCodeInfo(MailEntity mail);
 }

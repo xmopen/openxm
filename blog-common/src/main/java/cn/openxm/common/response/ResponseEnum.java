@@ -50,6 +50,11 @@ public enum ResponseEnum {
      * */
     RESPONSE_FAIL_USER_REGISTER_ERROR(10002,"用户注册失败，请稍后在进行重试。"),
 
+    /**
+     * RESPONSE_FAIL_USER_MAIL_CODE_NOT_MATCH 邮箱验证码匹配失败，请稍后重试。
+     * */
+    RESPONSE_FAIL_USER_MAIL_CODE_NOT_MATCH(10003,"验证码校验失败，请重新尝试！"),
+
     ;
 
     private final Integer code;

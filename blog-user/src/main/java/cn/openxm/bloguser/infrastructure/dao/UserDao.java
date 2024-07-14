@@ -12,5 +12,5 @@ import org.springframework.stereotype.Repository;
  */
 @Mapper
 @Repository
-public interface OpenXmUserDao extends BaseMapper<UserDO> {
+public interface UserDao extends BaseMapper<UserDO>  {
 }
