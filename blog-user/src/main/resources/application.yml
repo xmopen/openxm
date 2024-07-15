@@ -57,6 +57,13 @@ dubbo:
     username: nacos
     password: nacos
 
+openxm:
+  auth:
+    jwt:
+      secret: openxmcnuuuuiiijjjkkkllxxx
+      expiration: 259200L # 3 day.
+      tokenhead: 'Bearer '
+      tokenheader: Authorization
 
 # 日志配置。
 logging:

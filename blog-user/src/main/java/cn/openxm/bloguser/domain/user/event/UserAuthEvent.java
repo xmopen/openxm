@@ -1,6 +1,5 @@
 package cn.openxm.bloguser.domain.user.event;
 
-import cn.openxm.bloguser.domain.mail.model.MailEntity;
 import cn.openxm.bloguser.domain.user.model.UserEntity;
 
 /**
@@ -11,23 +10,23 @@ import cn.openxm.bloguser.domain.user.model.UserEntity;
 public interface UserAuthEvent {
 
     /**
-     * login event。
+     * onLogin event。
      * */
-    void login(UserEntity userEntity);
+    void onLogin(UserEntity userEntity);
 
     /**
-     * register event。
+     * onRegister event。
      * */
-    void register(UserEntity userEntity);
+    void onRegister(UserEntity userEntity);
 
     /**
-     * logout event。
+     * onLogout event。
      * */
-    void logout(UserEntity userEntity);
+    void onLogout(UserEntity userEntity);
 
     /**
-     * refresh 用户身份状态刷新。
+     * onRefresh 用户身份状态刷新。
      * */
-    void refresh(UserEntity userEntity);
+    void onRefresh(UserEntity userEntity);
 
 }

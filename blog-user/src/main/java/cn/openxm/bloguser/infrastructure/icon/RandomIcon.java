@@ -1,6 +1,7 @@
 package cn.openxm.bloguser.infrastructure.icon;
 
-import cn.openxm.bloguser.infrastructure.util.ThreadSafeRandom;
+
+import cn.openxm.common.randome.ThreadSafeRandom;
 
 /**
  * RandomIcon 获取随机Icon。

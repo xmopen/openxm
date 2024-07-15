@@ -1,15 +1,15 @@
-package cn.openxm.bloguser.infrastructure.util;
+package cn.openxm.common.randome;
 
 import java.security.SecureRandom;
 
 /**
- * 线程安全的随机类。Java 中默认提供的随机函数类：
- * 1、java.util.Random 低效且线程不安全。
- * 2、java.security.SecureRandom 在线程安全的环境下，提供高安全性的、更加高难度的被攻击预测的随机函数。
- * 3、java.util.concurrent.ThreadLocalRandom 高效并且线程安全的但是安全性没有第二个高的随机算法。
+ * 1、java.util.Random is inefficient and thread-unsafe.
+ * 2、java.security.SecureRandom in thread safe environment,to provide high security,more difficult attack prediction of
+ *    random function.
+ * 3、java.util.concurrent.ThreadLocalRandom efficient and thread-safe,but not as secure as the SecureRandom.
  *
  * @author Xiao Ma
- * @date 2024/6/27
+ * @date 2024/7/16
  * @slogan 少年应有鸿鹄志，当骑骏马踏平川。
  */
 public class ThreadSafeRandom {
@@ -54,15 +54,5 @@ public class ThreadSafeRandom {
         }
         return SECURE_RANDOM_SOURCE.nextInt(miniRandom,maxiRandom);
     }
+
 }
-
-
-
-
-
-
-
-
-
-
-

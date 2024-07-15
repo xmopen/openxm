@@ -26,9 +26,10 @@ public class MailServerController {
 
     /**
      * generateMailCode 针对用户的邮件生成一个随机的验证码，并保留15分钟。
+     * The expiration time is temporarily set to 1 hour.
      * */
     @PostMapping(value = "/generate/code")
-    @RateLimit(limit = 1,limitKey = "user.mail",window = 1000*60)
+    @RateLimit(limit = 1,limitKey = "user.mail",window = 1000*60*60)
     public Response<String> generateMailCode(@RequestBody UserMailDTO userMailDTO){
         return this.userMailManager.generateMailCode(userMailDTO.toDomainEntity());
     }

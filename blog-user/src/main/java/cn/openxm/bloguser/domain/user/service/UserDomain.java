@@ -12,10 +12,10 @@ public interface UserDomain {
 
     /**
      * register 用户注册信息。
+     *
      * @param  userEntity 用户实体。
-     * @return 注册响应结果。
      * */
-    Response<Object> register(UserEntity userEntity);
+    void register(UserEntity userEntity);
 
     /**
      * login 用户登录。

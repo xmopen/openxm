@@ -28,11 +28,12 @@ import java.util.Collections;
 @Service
 public class SftpMailServer implements MailDomain {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SftpMailServer.class);
+
     private final JavaMailSender mailSender;
 
     private final RedisTemplate<String, Object> redisTemplate;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SftpMailServer.class);
 
     public SftpMailServer(JavaMailSender mailSender, RedisTemplate<String, Object> mailTemplate) {
         this.mailSender = mailSender;
@@ -77,12 +78,13 @@ public class SftpMailServer implements MailDomain {
         DefaultRedisScript<Boolean> script =  new DefaultRedisScript<>();
         script.setScriptText(RedisLuaScriptConstant.REDIS_LUA_SCRIPT_HASH_SET_WITH_EXPIRED);
         script.setResultType(Boolean.class);
-        String jsonInfo = JSON.toJSONString(mailRedisDO);
-        LOGGER.info("save mail code:[{}] mail:[{}] data:[{}]", mail.getCode(),mail.getTo(), jsonInfo);
+        String key = this.getMailCodeKey(mail);
+        LOGGER.info("save mail code:[{}],key:{}, mail:[{}] data:[{}]", mail.getCode(),key,mail.getTo(), mailRedisDO);
+        // The RedisTemplate  itself is configured with FastJson serialization.
         return Boolean.TRUE.equals(redisTemplate.execute(script,
-                Collections.singletonList(this.getMailCodeKey(mail)),
+                Collections.singletonList(key),
                 RedisKeysConstant.REDIS_KEY_USER_MAIL_CODE,
-                jsonInfo,
+                mailRedisDO,
                 RedisKeysConstant.REDIS_TTL_MAIL_CODE_REDIS_SECOND_TTL));
     }
 
@@ -97,7 +99,10 @@ public class SftpMailServer implements MailDomain {
     @Override
     public MailRedisDO getMailCodeInfo(MailEntity mail) {
         HashOperations<String, String, String> ops =  this.redisTemplate.opsForHash();
-        String jsonObj =  ops.get(this.getMailCodeKey(mail),RedisKeysConstant.REDIS_KEY_USER_MAIL_CODE);
+        String key = this.getMailCodeKey(mail);
+        LOGGER.info("get mail code key:{},entity:{}",key,mail);
+        // TODO: cannot obtain the redisDO value.
+        String jsonObj =  ops.get(key,RedisKeysConstant.REDIS_KEY_USER_MAIL_CODE);
         if (jsonObj == null || jsonObj.isEmpty()) {
             return null;
         }

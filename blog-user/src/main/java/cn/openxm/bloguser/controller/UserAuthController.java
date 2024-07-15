@@ -1,9 +1,14 @@
 package cn.openxm.bloguser.controller;
 
 import cn.openxm.bloguser.application.manager.UserAuthManager;
+import cn.openxm.bloguser.constant.TransformConstant;
 import cn.openxm.bloguser.controller.dto.UserAuthDTO;
 import cn.openxm.common.response.Response;
 import cn.openxm.common.service.UserAuthService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -19,6 +24,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/user/auth")
 public class UserAuthController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserAuthController.class);
+
     private final UserAuthManager userAuthManager;
 
     public UserAuthController(UserAuthManager userAuthManager) {
@@ -26,8 +33,15 @@ public class UserAuthController {
     }
 
     @PostMapping(value = "/register")
-    public Response<Object> userRegister(@RequestBody UserAuthDTO userAuthDTO){
-        return this.userAuthManager.register(userAuthDTO.toDomainEntity());
+    public Response<String> userRegister(@RequestBody UserAuthDTO userAuthDTO, HttpServletResponse response){
+        Response<String> result =  this.userAuthManager.register(userAuthDTO.toDomainEntity());
+        this.addTokenToCookie(response,result.getData());
+        LOGGER.info("register token:{}",result.getData());
+        return result;
+    }
+
+    private void addTokenToCookie(HttpServletResponse response, String token){
+        response.addCookie(new Cookie(TransformConstant.TRANSFORM_COOKIE_NAME_TOKEN_KEY, token));
     }
 
     @PostMapping(value = "/login")

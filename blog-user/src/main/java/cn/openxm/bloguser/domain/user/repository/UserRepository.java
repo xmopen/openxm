@@ -12,7 +12,17 @@ import cn.openxm.bloguser.domain.user.model.UserEntity;
 public interface UserRepository {
 
     /**
-     * save 持久化用户信息，并同步信息到Redis中。
+     * save persist user information and finally synchronized it to redis.
+     *
+     * @param userEntity user information that is synchronized.
      * */
     void save(UserEntity userEntity);
+
+    /**
+     * refreshUserInfoTInRedis refreshes user information in redis.
+     *
+     * @param  userEntity user information that is refreshed.
+     * */
+    void refreshUserInfoTInRedis(UserEntity userEntity);
+
 }

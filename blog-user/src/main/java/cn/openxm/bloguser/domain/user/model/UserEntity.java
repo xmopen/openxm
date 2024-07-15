@@ -24,10 +24,13 @@ import java.util.Objects;
 public class UserEntity implements Serializable {
 
     /**
-     * 用户唯一标识符。
+     * id unique identifier for automatic growth.
      * */
     private Integer id;
 
+    /**
+     * mail of a unique identifier specified by the user.
+     * */
     private String mail;
 
     private int mailCode;
@@ -37,6 +40,17 @@ public class UserEntity implements Serializable {
     private String password;
 
     private String icon;
+
+    /**
+     * token is a unique symbol of a user.
+     * this token is not a JWT Token.
+     * */
+    private String token;
+
+    /**
+     * jwtToken is a JWT Token,not a user token.
+     * */
+    private String jwtToken;
 
     /**
      * 校验当前领域UserEntity在注册模块信息是否足够。

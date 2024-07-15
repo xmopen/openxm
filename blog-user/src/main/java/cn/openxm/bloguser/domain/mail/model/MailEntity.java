@@ -1,6 +1,6 @@
 package cn.openxm.bloguser.domain.mail.model;
 
-import cn.openxm.bloguser.infrastructure.util.ThreadSafeRandom;
+import cn.openxm.common.randome.ThreadSafeRandom;
 import lombok.*;
 
 /**
